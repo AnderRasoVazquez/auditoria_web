@@ -1,4 +1,5 @@
 <?php
-	$conexion = mysqli_connect("localhost","Xoye001","pLTtQGp83") or die("Fallo en el establecimiento de la conexión");
-	mysqli_select_db($conexion,"Xoye001_BaseballFans") or die ("Error en la selección de la base de datos");
+	$conexion = mysqli_connect("localhost","Xdperez067","AVmu8sW4r") or die("Fallo en el establecimiento de la conexión");
+	// mysqli_select_db($conexion,"Xdperez067_db_auditoria_sgssi")
+	mysqli_select_db($conexion,"Xdperez067_db_auditoria_sgssi") or die ("Error en la selección de la base de datos");
 ?>
