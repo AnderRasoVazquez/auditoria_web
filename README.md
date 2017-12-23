@@ -6,7 +6,7 @@ Para poder hacer esto hay que asegurarse de que el servidor de MySQL de Xampp es
 $server = "localhost";
 $user = "Xdperez067";
 $passw = "AVmu8sW4r";
-$bd = "Xdperez067_db_auditoría_sgssi";
+$bd = "Xdperez067_db_auditoria_sgssi";
 ```
 
 
