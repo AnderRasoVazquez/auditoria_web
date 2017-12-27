@@ -14,39 +14,41 @@ echo'<script> window.location="panel.php"; </script>';
     <link type="text/css" href="./css/formato.css" rel="stylesheet" />
 	  <script type="text/javascript">
 	function mostrarOcultar(id){
-	var elemento = document.getElementById(id);
-	if(!elemento) {
-	return true;
-	}
-	if (elemento.style.display == "none") {
-	elemento.style.display = "block"
-	} else {
-	elemento.style.display = "none"
-	};
-	return true;
+    	var elemento = document.getElementById(id);
+    	if(!elemento) {
+        	return true;
+    	}
+    	if (elemento.style.display == "none") {
+        	elemento.style.display = "block"
+    	} else {
+        	elemento.style.display = "none"
+    	};
+    	return true;
 	};
 
 	function comprobarCaracteres(nombrej,fechaj,equipo,nac){
+    	if(comprobar(nombrej,equipo,nac)){
+            return true;
+            // yyyyyyyyyyyyy todo lo que hay aqui debajo no sirve
+            // naisu
+            $.post("insertplayer.php", {
+            nombrej1: nombrej,
+            fechaj1: fechaj,
+            equipo1: equipo,
+            nac1: nac
+            }, function(data) {
+                if (data == '¡Has añadido el jugador correctamente!') {
+                    $("form")[0].reset();
+                }
+                alert(data);
+                window.locationf="panel.php";
+        	});
+    	} else{
+        	alert('Solo letras en los campos');
+        	return false;
+    	}
+	}
 
-	if(comprobar(nombrej,equipo,nac)){
-	  return true;
-	   $.post("insertplayer.php", {
-			nombrej1: nombrej,
-			fechaj1: fechaj,
-			equipo1: equipo,
-			nac1: nac
-		 }, function(data) {
-			if (data == '¡Has añadido el jugador correctamente!') {
-				$("form")[0].reset();
-			}
-			alert(data);
-			window.locationf="panel.php";
-			});
-	}else{
-	alert('Solo letras en los campos');
-	return false;
-	}
-	}
 	function comprobar(nombrej,equipo,nac){
 		var patron = /^[a-zA-Z\s]{1,20}$/;
 		valueForm1=document.getElementById(nombrej).value;
