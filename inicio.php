@@ -2,7 +2,7 @@
 session_start();
 include 'serv.php';
 if(isset($_SESSION['usuario'])){
-//el siguiente script hace que nos redirijamos a panel.php si tenemos la sesión iniciada	
+//el siguiente script hace que nos redirijamos a panel.php si tenemos la sesión iniciada
 echo'<script> window.location="panel.php"; </script>';
 }
 ?>
@@ -24,10 +24,10 @@ echo'<script> window.location="panel.php"; </script>';
 	elemento.style.display = "none"
 	};
 	return true;
-	};	
-	
+	};
+
 	function comprobarCaracteres(nombrej,fechaj,equipo,nac){
-		
+
 	if(comprobar(nombrej,equipo,nac)){
 	  return true;
 	   $.post("insertplayer.php", {
@@ -62,28 +62,28 @@ echo'<script> window.location="panel.php"; </script>';
 	}
 	</script>
 	</head>
- 
+
 <body background="./css/imagen/fondo.jpg">
- 
+
     <div id="registrar">
 <a href="registro.php"</a>Registrarse</a>
 </div> <!-- fin opcion-->
     <div id="envoltura">
         <div id="contenedor">
- 
+
             <div id="cabecera" >
                 <img src="./css/imagen/iniciologo1.jpg" >
             </div>
- 
+
             <div id="cuerpo">
                 <form id="form-login" action="validar.php" method="POST" autocomplete="off">
-                   
+
                     <p><label >Usuario:</label></p>
                         <input name="usuario" type="text" id="usuario" placeholder="Ingresa Usuario" autofocus="" required=""></p>
- 
+
                     <p><label>Contraseña:</label></p>
                         <input name="contrasenia" type="password" id="contrasenia" placeholder="Ingresa Password" required=""></p>
- 
+
                     <p id="bot"><input type="submit" id="submit" name="login" value="Ingresar" class="boton"></p>
                 </form>
 				<!--parte de añadir elemnto/jugador-->
@@ -92,13 +92,13 @@ echo'<script> window.location="panel.php"; </script>';
 				<form id="form" action="insertplayer.php" method="post" >
 						<p><label >Nombre Jugador:</label></p>
                         <input name="nombrej" type="text" id="nombrej" placeholder="Nombre y Apellidos Jugador"  required=""></p>
-						
+
 						<p><label for="fecha">Fecha de nacimiento:</label></p>
                         <input name="fechaj" type="date" id="fechaj" class="fecha" placeholder="Fecha de Nacimiento Jugador" required=""/></p>
-						
+
 						<p><label >Equipo Jugador:</label></p>
                         <input name="equipo" type="text" id="equipo" placeholder="Nombre Equipo"  required=""></p>
-						
+
 						<p><label >Nacionalidad:</label></p>
                         <input name="nac" type="text" id="nac" placeholder="Nacionalidad del Jugador" required=""></p>
 						<p align="right" id="bot"><input type="submit" id="submit" name="submit" value="Añadir" class="boton1" onclick="return comprobarCaracteres('nombrej','fechaj','equipo','nac')"></p>
@@ -111,9 +111,9 @@ echo'<script> window.location="panel.php"; </script>';
 				<p></p>
 				<!--tabla-->
 				<?php
-	$conexion = mysqli_connect("localhost","Xoye001","pLTtQGp83") or die("Fallo en el establecimiento de la conexión");
-	mysqli_select_db($conexion,"Xoye001_BaseballFans") or die ("Error en la selección de la base de datos");
- 
+	$conexion = mysqli_connect("localhost","Xdperez067","AVmu8sW4r") or die("Fallo en el establecimiento de la conexión");
+    mysqli_select_db($conexion,"Xdperez067_db_auditoria_sgssi") or die ("Error en la selección de la base de datos");
+
 	$query = "SELECT * FROM Jugadores";
 	$result = mysqli_query($conexion, $query);
 	?>
@@ -137,7 +137,7 @@ echo'<script> window.location="panel.php"; </script>';
                 <div>
 				<div style="display:none;" id="ocultable">
 				<?php
-				
+
 
 				?>
 				<form name="form1" style="display:block">
@@ -145,12 +145,12 @@ echo'<script> window.location="panel.php"; </script>';
 				</div>
 				</div>
 				</div>
-				
+
             </div><!--fin cuerpo-->
- 
+
             <div id="pie">Sistema de Login Y Registro</div>
         </div><!-- fin contenedor -->
     </div><!--fin envoltura-->
 </body>
- 
+
 </html>
