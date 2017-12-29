@@ -1,5 +1,17 @@
 <?php
 include 'serv.php';
+include 'utils.php';
+if(!isset($_SESSION['usuario'])) {
+    // no hay sesión iniciada
+    echo '<script> window.location="inicio.php"; </script>';
+} elseif(isset($_SESSION['tiempo']) AND time() > $_SESSION['tiempo'] + getInactivityTime()) {
+    // ha expirado el tiempo de inactividad
+    session_unset();
+    session_destroy();
+    echo 'Sesión cerrada por inactividad.';
+	echo '<script> window.location="inicio.php"; </script>';
+}
+$_SESSION['tiempo'] = time();
 
 if(isset($_POST['submit'])){
 	$id = $_POST['id'];
@@ -16,6 +28,6 @@ if(isset($_POST['submit'])){
 		}
 	}
 	mysqli_close($connection);
-	
+
 	echo '<script> window.location="panel.php"; </script>';;
 ?>
