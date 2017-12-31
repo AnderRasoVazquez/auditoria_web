@@ -88,66 +88,6 @@ echo'<script> window.location="panel.php"; </script>';
 
                     <p id="bot"><input type="submit" id="submit" name="login" value="Ingresar" class="boton"></p>
                 </form>
-				<!--parte de añadir elemnto/jugador-->
-				<button onclick="return mostrarOcultar('ocultable2')" type="button" class="boton">Añadir Jugador</button>
-				<div style="display:none;" id="ocultable2">
-				<form id="form" action="insertplayer.php" method="post" >
-						<p><label >Nombre Jugador:</label></p>
-                        <input name="nombrej" type="text" id="nombrej" placeholder="Nombre y Apellidos Jugador"  required=""></p>
-
-						<p><label for="fecha">Fecha de nacimiento:</label></p>
-                        <input name="fechaj" type="date" id="fechaj" class="fecha" placeholder="Fecha de Nacimiento Jugador" required=""/></p>
-
-						<p><label >Equipo Jugador:</label></p>
-                        <input name="equipo" type="text" id="equipo" placeholder="Nombre Equipo"  required=""></p>
-
-						<p><label >Nacionalidad:</label></p>
-                        <input name="nac" type="text" id="nac" placeholder="Nacionalidad del Jugador" required=""></p>
-						<p align="right" id="bot"><input type="submit" id="submit" name="submit" value="Añadir" class="boton1" onclick="return comprobarCaracteres('nombrej','fechaj','equipo','nac')"></p>
-				 </form>
-				</div>
-				<!--tabla de jugadores-->
-				<button onclick="return mostrarOcultar('ocultable3')" type="button" class="boton">Mostrar Jugadores</button>
-				<div style="display:none;" id="ocultable3">
-				TABLA DE JUGADORES
-				<p></p>
-				<!--tabla-->
-				<?php
-	$conexion = mysqli_connect("localhost","Xdperez067","AVmu8sW4r") or die("Fallo en el establecimiento de la conexión");
-    mysqli_select_db($conexion,"Xdperez067_db_auditoria_sgssi") or die ("Error en la selección de la base de datos");
-
-	$query = "SELECT * FROM Jugadores";
-	$result = mysqli_query($conexion, $query);
-	?>
-				<table border=\"5\" cellpadding=\"5\" cellspacing=\"0\" style=\"border-collapse: collapse\" bordercolor=\"#808080\" width=\"100&#37;\" id=\"AutoNumber2\" bgcolor=\"#C0C0C0\">
-<tr>
-<td width=25>ID:</td>
-<td width=25>Nombre:</td>
-<td width=25>Action:</td>
-</tr>
-<form action="modify.php" method="post">
-<?php while ($row = mysqli_fetch_array($result)){
-	$id = $row['ID'];
-	?>
-<tr>
-<td><?php echo $row['ID']; ?> </td>
-<td><?php echo $row['Nombre']; ?> </td>
-<td><?php echo "<a href='modify.php?id=$id'>Modificar</a>";?> <?php echo "<a href='delete.php?id=$id'>Borrar</a>"; }?> </td>
-</tr>
-</table>
-
-                <div>
-				<div style="display:none;" id="ocultable">
-				<?php
-
-
-				?>
-				<form name="form1" style="display:block">
-				</form>
-				</div>
-				</div>
-				</div>
-
             </div><!--fin cuerpo-->
 
             <div id="pie">Sistema de Login Y Registro</div>
