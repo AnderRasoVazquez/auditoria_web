@@ -15,7 +15,7 @@ if(isset($_SESSION['usuario'])) {
     <meta charset="utf-8">
     <link type="text/css" href="./css/formato.css" rel="stylesheet" />
 	<script type="text/javascript">
-	
+
 	 function misFunciones(idMail,dni,pass,repass,nombre,apellidos,usuario,fecha){
 	 validateMail(idMail);
 	 validarDni(dni);
@@ -23,7 +23,7 @@ if(isset($_SESSION['usuario'])) {
 	 comprobarCaracteresN(nombre);
 	 comprobarCaracteresA(apellidos);
 	 comprobarUsuario(usuario);
-	 
+
 	 if((validateMail(idMail)&&validarDni(dni)&&comprobarPasswords(pass,repass)&&comprobarCaracteresN(nombre)&&comprobarCaracteresA(apellidos)&&comprobarUsuario(usuario))==true){
 		 return true;
 		 $.post("insert.php", {
@@ -41,26 +41,41 @@ if(isset($_SESSION['usuario'])) {
 			alert(data);
 			window.locationf="inicio.php";
 			});
-		 
+
 	 }else{
 		 alert('Introduce los datos correctamente');
 		 return false;
 	 }
 	 }
-	 function comprobarPasswords(pass1,pass2){
-		
-	 	valueForm1=document.getElementById(pass1).value;
-	 	
-		valueForm2=document.getElementById(pass2).value;
 
+    function comprobarPasswords(pass1,pass2){
+        valueForm1=document.getElementById(pass1).value;
+        valueForm2=document.getElementById(pass2).value;
+        if (valueForm1==valueForm2){
+            // no me gusta el ir comprobando la misma string multiples veces para distintos criterios
+            // pero las regex no son lo mío. al menos parece que tira
+            if (mb_strlen(valueForm1, 'UT-8') >= 8) {
+                regex = "/[a-z]+/";
+                if (preg_match(regex, valueForm1)) {
+                    regex = "/[A-Z]+/";
+                    if (preg_match(regex, valueForm1)) {
+                        regex = "/[0-9]+/";
+                        if (preg_match(regex, valueForm1)) {
+                            regex = "/[_¿?¡!|@·#$~%&()]+/";
+                            if (preg_match(regex, valueForm1)) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            alert('La contraseña tiene que contener letras mayúsculas, minúscuas, números y símbolos. Longitud mínima de 8 caracteres.');
+            return false;
+        }
+        alert('Las contraseñas no coinciden');
+        return false;
+    }
 
-	 if (valueForm1==valueForm2){
-	 	 return true;
-
-	 }
-	 alert('Las contraseñas no coinciden');
-	 return false;
-	 }
 	 function comprobarCaracteresN(nombre){
 	 valueForm=document.getElementById(nombre).value;
 	  var patron = /^[a-zA-Z\s]{1,20}$/;
@@ -69,7 +84,7 @@ if(isset($_SESSION['usuario'])) {
 	  }
 	   alert('Solo letras en nombre');
 	  return false;
-	 
+
 	 }
 	 function comprobarUsuario(nombre){
 	 valueForm=document.getElementById(nombre).value;
@@ -79,7 +94,7 @@ if(isset($_SESSION['usuario'])) {
 	  }
 	   alert('Sin espacios el usuario');
 	  return false;
-	 
+
 	 }
 	  function comprobarCaracteresA(apellidos){
 	 valueForm=document.getElementById(apellidos).value;
@@ -92,10 +107,10 @@ if(isset($_SESSION['usuario'])) {
 	 }
 	function validateMail(idMail)
 	{
-		//Creamos un objeto 
+		//Creamos un objeto
 		object=document.getElementById(idMail);
 		valueForm=object.value;
-	 
+
 		// Patron para el correo
 		var patron=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
 		if(valueForm.search(patron)==0)
@@ -108,7 +123,7 @@ if(isset($_SESSION['usuario'])) {
 				 object.style.color="#f00";
 
 		           alert('Mail incorrecto');
-		
+
 		      return false;
 
 }
@@ -122,7 +137,7 @@ if(isset($_SESSION['usuario'])) {
 		valueForm1=object.value;
 		valueForm2=object.value;
       expresion_regular_dni = /^\d{8}-[a-zA-Z]$/;
-      
+
       if(valueForm.search(expresion_regular_dni)==0){
          numero = valueForm1.substr(0,8);
          letr = valueForm2.substr(9,1);
@@ -135,7 +150,7 @@ if(isset($_SESSION['usuario'])) {
 
            alert('La letra no corresponde con el DNI.');
 		        return false;
-		
+
          }else{
 		 object.style.color="#000";
            return true;
@@ -146,28 +161,28 @@ if(isset($_SESSION['usuario'])) {
          alert('DNI no válido.');
 
 		       return false;
-			   
+
 
       }
 }
 
 	</script>
-	
+
 </head>
- 
+
 <body>
     <div id="registrar">
             <a href="inicio.php"</a>Regresar</a>
     </div>
     <div id="envoltura">
         <div id="contenedor">
- 
+
             <div id="cabecera">
                 <img src="./css/imagen/iniciologo1.jpg" >
             </div>
- 
+
             <div id="cuerpo">
- 
+
                 <form id="form" action="insert.php" method="post" >
 				<p><label for="nombre">Usuario:</label></p>
                         <input name="usuario" type="text" id="usuario" class="usuario" placeholder="Introduce tu usuario" autofocus="" required=""/></p>
@@ -184,22 +199,22 @@ if(isset($_SESSION['usuario'])) {
 					 <p><label for="fecha">Fecha de nacimiento:</label></p>
                         <input name="fecha" type="date" id="fecha" class="fecha" placeholder="Introduce tus fecha de nacimiento" required=""/></p>
                     <p><label for="correo">Correo:</label></p>
-                        <input name="correo" type="text" id="correo" class="correo" placeholder="Introduce tu mail"  required="" /></p> 
+                        <input name="correo" type="text" id="correo" class="correo" placeholder="Introduce tu mail"  required="" /></p>
                     <p><label for="pass">Password:</label></p>
                         <input name="pass" type="password" id="pass" class="pass" placeholder="Introduce tu contraseña" required=""/></p>
- 
+
                     <p><label for="repass">Repetir Password:</label></p>
                         <input name="repass" type="password" id="repass" class="repass" placeholder="Repite contraseña" required=""/></p>
- 
+
                     <p id="bot"><input name="submit" type="submit" id="boton" value="Registrar" class="boton" onclick="return misFunciones('correo','dni','pass','repass','nombre','apellidos','usuario', 'fecha')" /></p>
                 </form>
             </div>
- 
+
             <div id="pie">Sistema de Login Y Registro</div>
         </div><!-- fin contenedor -->
- 
+
     </div>
-	
+
 </body>
- 
+
 </html>
