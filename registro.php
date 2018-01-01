@@ -22,10 +22,9 @@ if(isset($_SESSION['usuario'])) {
             comprobarPasswords(pass,repass) &&
             comprobarCaracteresN(nombre) &&
             comprobarCaracteresA(apellidos) &&
-            comprobarUsuario(usuario))
-            alert("true");
-        else
-            alert("false");
+            comprobarUsuario(usuario)) {
+            document.getElementById("form_id").submit();
+        }
     }
 
     function comprobarPasswords(pass1,pass2){
@@ -34,15 +33,15 @@ if(isset($_SESSION['usuario'])) {
         if (valueForm1==valueForm2){
             // no me gusta el ir comprobando la misma string multiples veces para distintos criterios
             // pero las regex no son lo mío. al menos parece que tira
-            if (mb_strlen(valueForm1, 'UT-8') >= 8) {
-                regex = "/[a-z]+/";
-                if (preg_match(regex, valueForm1)) {
-                    regex = "/[A-Z]+/";
-                    if (preg_match(regex, valueForm1)) {
-                        regex = "/[0-9]+/";
-                        if (preg_match(regex, valueForm1)) {
-                            regex = "/[_¿?¡!|@·#$~%&()]+/";
-                            if (preg_match(regex, valueForm1)) {
+            if (valueForm1.length >= 8) {
+                regex = /[a-z]+/;
+                if (regex.test(valueForm1)) {
+                    regex = /[A-Z]+/;
+                    if (regex.test(valueForm1)) {
+                        regex = /[0-9]+/;
+                        if (regex.test(valueForm1)) {
+                            regex = /[_¿?¡!|@·#$~%&()]+/;
+                            if (regex.test(valueForm1)) {
                                 return true;
                             }
                         }
@@ -156,7 +155,7 @@ if(isset($_SESSION['usuario'])) {
 
             <div id="cuerpo">
 
-                <form id="form" action="insert.php" method="post" >
+                <form id="form_id" action="insert.php" method="post" >
 				<p><label for="nombre">Usuario:</label></p>
                         <input name="usuario" type="text" id="usuario" class="usuario" placeholder="Introduce tu usuario" autofocus="" required=""/></p>
                     <p><label for="nombre">Nombre:</label></p>
@@ -167,7 +166,7 @@ if(isset($_SESSION['usuario'])) {
                     <p><label for="apellidos">Apellidos:</label></p>
                         <input name="apellidos" type="text" id="apellidos" class="apellidos" placeholder="Introduce tus apellidos" required=""/></p>
 						<p><label for="dni">DNI:</label></p>
-                        <input name="dni" type="text" id="dni" class="dni" placeholder="Introduce tu DNI" onchange="javascript:colorearDni('dni')" required="" /></p>
+                        <input name="dni" type="text" id="dni" class="dni" placeholder="Introduce tu DNI" required="" /></p>
                     <!--=============================================================================================-->
 					 <p><label for="fecha">Fecha de nacimiento:</label></p>
                         <input name="fecha" type="date" id="fecha" class="fecha" placeholder="Introduce tus fecha de nacimiento" required=""/></p>
@@ -179,7 +178,7 @@ if(isset($_SESSION['usuario'])) {
                     <p><label for="repass">Repetir Password:</label></p>
                         <input name="repass" type="password" id="repass" class="repass" placeholder="Repite contraseña" required=""/></p>
 
-                    <p id="bot"><input name="submit" type="button" id="boton" value="Registrar" class="boton" onclick="misFunciones('correo','dni','pass','repass','nombre','apellidos','usuario', 'fecha')" /></p>
+                    <p id="bot"><input name="btnSubmit" type="button" id="boton" value="Registrar" class="boton" onclick="misFunciones('correo','dni','pass','repass','nombre','apellidos','usuario', 'fecha')" /></p>
                 </form>
             </div>
 
