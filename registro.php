@@ -16,37 +16,17 @@ if(isset($_SESSION['usuario'])) {
     <link type="text/css" href="./css/formato.css" rel="stylesheet" />
 	<script type="text/javascript">
 
-	 function misFunciones(idMail,dni,pass,repass,nombre,apellidos,usuario,fecha){
-	 validateMail(idMail);
-	 validarDni(dni);
-	 comprobarPasswords(pass,repass);
-	 comprobarCaracteresN(nombre);
-	 comprobarCaracteresA(apellidos);
-	 comprobarUsuario(usuario);
-
-	 if((validateMail(idMail)&&validarDni(dni)&&comprobarPasswords(pass,repass)&&comprobarCaracteresN(nombre)&&comprobarCaracteresA(apellidos)&&comprobarUsuario(usuario))==true){
-		 return true;
-		 $.post("insert.php", {
-			usuario1: usuario,
-			nombre1: nombre,
-			apellidos1: apellidos,
-			dni1: dni,
-			fecha1: fecha,
-			idMail1: idMail,
-			pass1: pass
-		 }, function(data) {
-			if (data == '¡Te has registrado correctamente!') {
-				$("form")[0].reset();
-			}
-			alert(data);
-			window.locationf="inicio.php";
-			});
-
-	 }else{
-		 alert('Introduce los datos correctamente');
-		 return false;
-	 }
-	 }
+    function misFunciones(idMail,dni,pass,repass,nombre,apellidos,usuario,fecha){
+        if (validateMail(idMail) &&
+            validarDni(dni) &&
+            comprobarPasswords(pass,repass) &&
+            comprobarCaracteresN(nombre) &&
+            comprobarCaracteresA(apellidos) &&
+            comprobarUsuario(usuario))
+            alert("true");
+        else
+            alert("false");
+    }
 
     function comprobarPasswords(pass1,pass2){
         valueForm1=document.getElementById(pass1).value;
@@ -76,95 +56,88 @@ if(isset($_SESSION['usuario'])) {
         return false;
     }
 
-	 function comprobarCaracteresN(nombre){
-	 valueForm=document.getElementById(nombre).value;
-	  var patron = /^[a-zA-Z\s]{1,20}$/;
-	  if(!valueForm.search(patron)){
-	  	    return true;
-	  }
-	   alert('Solo letras en nombre');
-	  return false;
+    function comprobarCaracteresN(nombre){
+        valueForm=document.getElementById(nombre).value;
+        var patron = /^[a-zA-Z\s]{1,20}$/;
+        if(!valueForm.search(patron)){
+            return true;
+        }
+        alert('Solo letras en nombre');
+        return false;
+    }
 
-	 }
-	 function comprobarUsuario(nombre){
-	 valueForm=document.getElementById(nombre).value;
-	  var patron = /^[\w]{1,20}$/;
-	  if(!valueForm.search(patron)){
-	  	    return true;
-	  }
-	   alert('Sin espacios el usuario');
-	  return false;
+    function comprobarUsuario(nombre){
+        valueForm=document.getElementById(nombre).value;
+        var patron = /^[\w]{1,20}$/;
+            if(!valueForm.search(patron)){
+        return true;
+        }
+        alert('Sin espacios el usuario');
+        return false;
+    }
 
-	 }
-	  function comprobarCaracteresA(apellidos){
-	 valueForm=document.getElementById(apellidos).value;
-	  var patron = /^[a-zA-Z\s]{1,20}$/;
-	  if(!valueForm.search(patron)){
-	  	  	    return true;
-	  }
-	  alert('Solo letras en apellidos');
-	  return false;
-	 }
-	function validateMail(idMail)
-	{
-		//Creamos un objeto
-		object=document.getElementById(idMail);
-		valueForm=object.value;
+    function comprobarCaracteresA(apellidos){
+        valueForm=document.getElementById(apellidos).value;
+        var patron = /^[a-zA-Z\s]{1,20}$/;
+        if(!valueForm.search(patron)){
+            return true;
+        }
+        alert('Solo letras en apellidos');
+        return false;
+    }
 
-		// Patron para el correo
-		var patron=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
-		if(valueForm.search(patron)==0)
-		{
-			//Mail correcto
-			object.style.color="#000";
-			return true;
-		}
-		//Mail incorrecto
-				 object.style.color="#f00";
+    function validateMail(idMail){
+        //Creamos un objeto
+        object=document.getElementById(idMail);
+        valueForm=object.value;
 
-		           alert('Mail incorrecto');
+        // Patron para el correo
+        var patron=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+        if(valueForm.search(patron)==0){
+            //Mail correcto
+            object.style.color="#000";
+            return true;
+        }
+        //Mail incorrecto
+        object.style.color="#f00";
 
-		      return false;
+        alert('Mail incorrecto');
 
-}
-	function validarDni(dni){
-      var numero;
-      var letr;
-      var letra;
-      var expresion_regular_dni;
-      object=document.getElementById(dni);
-		valueForm=object.value;
-		valueForm1=object.value;
-		valueForm2=object.value;
-      expresion_regular_dni = /^\d{8}-[a-zA-Z]$/;
+        return false;
+    }
 
-      if(valueForm.search(expresion_regular_dni)==0){
-         numero = valueForm1.substr(0,8);
-         letr = valueForm2.substr(9,1);
-         letr=letr.toUpperCase();
-         numero = numero % 23;
-         letra='TRWAGMYFPDXBNJZSQVHLCKET';
-         letra=letra.substr(numero,1);
-         if (letra!=letr) {
-		 		 object.style.color="#f00";
+    function validarDni(dni){
+        var numero;
+        var letr;
+        var letra;
+        var expresion_regular_dni;
+        object=document.getElementById(dni);
+        valueForm=object.value;
+        valueForm1=object.value;
+        valueForm2=object.value;
+        expresion_regular_dni = /^\d{8}-[a-zA-Z]$/;
 
-           alert('La letra no corresponde con el DNI.');
-		        return false;
-
-         }else{
-		 object.style.color="#000";
-           return true;
-         }
-      }else{
-	  		object.style.color="#f00";
-
-         alert('DNI no válido.');
-
-		       return false;
-
-
-      }
-}
+        if(valueForm.search(expresion_regular_dni)==0){
+            numero = valueForm1.substr(0,8);
+            letr = valueForm2.substr(9,1);
+            letr=letr.toUpperCase();
+            numero = numero % 23;
+            letra='TRWAGMYFPDXBNJZSQVHLCKET';
+            letra=letra.substr(numero,1);
+            if (letra!=letr) {
+                object.style.color="#f00";
+                alert('La letra no corresponde con el DNI.');
+                return false;
+            }else{
+                object.style.color="#000";
+                return true;
+            }
+        }else{
+            object.style.color="#f00";
+            alert('DNI no válido.');
+            return false;
+        }
+    }
 
 	</script>
 
@@ -206,7 +179,7 @@ if(isset($_SESSION['usuario'])) {
                     <p><label for="repass">Repetir Password:</label></p>
                         <input name="repass" type="password" id="repass" class="repass" placeholder="Repite contraseña" required=""/></p>
 
-                    <p id="bot"><input name="submit" type="submit" id="boton" value="Registrar" class="boton" onclick="return misFunciones('correo','dni','pass','repass','nombre','apellidos','usuario', 'fecha')" /></p>
+                    <p id="bot"><input name="submit" type="button" id="boton" value="Registrar" class="boton" onclick="misFunciones('correo','dni','pass','repass','nombre','apellidos','usuario', 'fecha')" /></p>
                 </form>
             </div>
 
