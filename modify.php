@@ -1,5 +1,6 @@
 <?php
 include 'utils.php';
+session_start();
 if(!isset($_SESSION['usuario'])) {
     // no hay sesión iniciada
     echo '<script> window.location="inicio.php"; </script>';
