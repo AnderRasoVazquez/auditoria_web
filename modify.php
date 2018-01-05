@@ -22,7 +22,7 @@ $_SESSION['tiempo'] = time();
 	<link type="text/css" href="./css/formato.css" rel="stylesheet" />
 	<script type="text/javascript">
 		function update(nombre,nac,fecha,equipo){
-			if(comprobar(nombrej,equipo,nac)){
+			if(comprobar(nombre,equipo,nac)){
 			return true;
 			$.post("update.php", {
 			nombre1: nombre,
