@@ -28,7 +28,7 @@ if(isset($_POST['submit'])){
 			echo "Error....!!";
 		}
 	}
-	mysqli_close($connection);
+	mysqli_close($conexion);
 
 	echo '<script> window.location="panel.php"; </script>';;
 ?>
