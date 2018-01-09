@@ -12,17 +12,24 @@ if(!isset($_SESSION['usuario'])) {
     echo 'Sesión cerrada por inactividad.';
 	echo '<script> window.location="inicio.php"; </script>';
 }
+
 $_SESSION['tiempo'] = time();
 
 if(isset($_POST['submit3'])){
+    $sql2 = "UPDATE Usuarios SET nombre=? WHERE username=?";
+    $sent2 = $conexion->prepare($sql2);
+    $sent2->bind_param("ss", $nombre, $actual);
 
 	$nombre = $_POST['nombre'];
-	$actual = $_SESSION['usuario'];
+    $actual = $_SESSION['usuario'];
 
-	echo "<script> alert('voy a modificar $actual');</script>";
-	$actualizaruser = "UPDATE Usuarios SET nombre='$nombre' WHERE username='$actual'";
-	mysqli_query($conexion,$actualizaruser);
-	}
-	mysqli_close($connection);
-	echo '<script> window.location="panel.php"; </script>';
+    if ($sent2->execute()) {
+		echo '<script> alert("¡Actualizado correctamente!");</script>';
+    }else{
+        echo "Error....!!";
+    }
+}
+
+mysqli_close($conexion);
+echo '<script> window.location="panel.php"; </script>';
 ?>
