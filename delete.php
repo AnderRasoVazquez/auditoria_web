@@ -19,7 +19,6 @@ $id = $_GET['id'];
 # comprobar que el id es solo un numero y no una inyección sql
 $pattern = "/^[0-9]*$/";
 if (preg_match($pattern , $id)) {
-    echo "<script> alert('es un id lindo');</script>";
     $sql = "DELETE FROM Jugadores WHERE ID = ?";
     # sentencia
     $sent = $conexion->prepare($sql);
