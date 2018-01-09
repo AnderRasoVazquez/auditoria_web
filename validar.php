@@ -16,9 +16,6 @@
 				$sql = "SELECT * FROM Usuarios WHERE username=? AND password=?";
 				# sentencia
 				$sent = $conexion->prepare($sql);
-				if($sent === false) {
-					trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $conexion->errno . ' ' . $conexion->error, E_USER_ERROR);
-				}
 
 				$sent->bind_param("ss", $usuario, $pw);
 
