@@ -1,5 +1,5 @@
 <?php
-	session_start(); 
+	session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,12 +13,24 @@
 		<?php
 			include 'serv.php';
 			if(isset($_POST['login'])){
+				$sql = "SELECT * FROM Usuarios WHERE username=? AND password=?";
+				# sentencia
+				$sent = $conexion->prepare($sql);
+				if($sent === false) {
+					trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $conexion->errno . ' ' . $conexion->error, E_USER_ERROR);
+				}
+
+				$sent->bind_param("ss", $usuario, $pw);
+
 				$usuario = $_POST['usuario'];
 				$pw = md5($_POST['contrasenia']);
-				$log = mysqli_query($conexion, "SELECT * FROM Usuarios WHERE username='$usuario' AND password='$pw'");
-				if (mysqli_num_rows($log)>0) {
-					$row = mysqli_fetch_array($log);
-					$_SESSION["usuario"] = $row['username']; 
+
+				$sent->execute();
+
+				$result = $sent->get_result();
+
+				if (mysqli_num_rows($result)>0) {
+					$_SESSION["usuario"] = $usuario;
 				  	echo 'Iniciando sesión para '.$_SESSION['usuario'].' <p>';
 					echo '<script> window.location="panel.php"; </script>';
 				}
@@ -27,7 +39,7 @@
 					echo '<script> window.location="inicio.php"; </script>';
 				}
 			}
-			mysqli_close($connection);
-		?>	
+    		mysqli_close($conexion);
+		?>
 </body>
 </html>
