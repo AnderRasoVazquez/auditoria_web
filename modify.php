@@ -62,33 +62,49 @@ $_SESSION['tiempo'] = time();
 </head>
 </head>
 <body>
-		<?php
+
+<?php
+include 'serv.php';
+
 $id = $_GET['id'];
-$idact=$id;
-$conexion = mysqli_connect("localhost","Xdperez067","AVmu8sW4r") or die("Fallo en el establecimiento de la conexión");
-mysqli_select_db($conexion,"Xdperez067_db_auditoria_sgssi") or die ("Error en la selección de la base de datos");
-if($res = mysqli_query($conexion, "SELECT * FROM Jugadores WHERE ID='$id'")){
-    if(mysqli_num_rows($res) > 0){
-        echo "<table>";
+
+$pattern = "/^[0-9]*$/";
+if (!preg_match($pattern , $id)) {
+    $kanye_west_meme ="¯\\\_\(ツ\)_\/¯";
+    echo "<script> alert('Intento de inyección SQL detectado, su IP ha quedado registrada y se enviará a las autoridades.". $kanye_west_meme ."');</script>";
+    echo '<script> window.location="panel.php"; </script>';
+} else {
+    $idact = $id;
+
+	$sql1 = "SELECT * FROM Jugadores WHERE ID=?";
+	$sent1 = $conexion->prepare($sql1);
+	$sent1->bind_param("i", $id);
+    $id = $_GET['id'];
+	$sent1->execute();
+
+    if($res = $sent1->get_result()){
+        if(mysqli_num_rows($res) > 0){
+            echo "<table>";
             echo "<tr>";
-                echo "<th>ID</th>";
-                echo "<th>Nombre</th>";
-                echo "<th>Nacionalidad</th>";
-                echo "<th>FechaNacimiento</th>";
-				echo "<th>NombreEquipo</th>";
+            echo "<th>ID</th>";
+            echo "<th>Nombre</th>";
+            echo "<th>Nacionalidad</th>";
+            echo "<th>FechaNacimiento</th>";
+            echo "<th>NombreEquipo</th>";
             echo "</tr>";
-        while($row1 = mysqli_fetch_array($res)){
-            echo "<tr>";
+            while($row1 = mysqli_fetch_array($res)){
+                echo "<tr>";
                 echo "<td>" . $row1['ID'] . "</td>";
                 echo "<td>" . $row1['Nombre'] . "</td>";
                 echo "<td>" . $row1['Nacionalidad'] . "</td>";
                 echo "<td>" . $row1['FechaNacimiento'] . "</td>";
-				echo "<td>" . $row1['NombreEquipo'] . "</td>";
-            echo "</tr>";
+                echo "<td>" . $row1['NombreEquipo'] . "</td>";
+                echo "</tr>";
+            }
+            echo "</table>";
         }
-        echo "</table>";
-	}
-				}
+    }
+}
 ?>
 <div id="cuerpo">
                 <form id="form" action="update.php" method="POST" autocomplete="off">
