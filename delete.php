@@ -18,9 +18,6 @@ include 'serv.php';
 $sql = "DELETE FROM Jugadores WHERE ID = ?";
 # sentencia
 $sent = $conexion->prepare($sql);
-if($sent === false) {
-    trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $conexion->errno . ' ' . $conexion->error, E_USER_ERROR);
-}
 
 $sent->bind_param("i", $id);
 $id = $_GET['id'];
