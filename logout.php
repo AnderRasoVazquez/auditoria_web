@@ -2,7 +2,6 @@
 session_start();
 session_unset();
 session_destroy();
-echo 'Cerraste sesión';
 echo '<script> window.location="inicio.php"; </script>';
 ?>
 <!DOCTYPE html>
