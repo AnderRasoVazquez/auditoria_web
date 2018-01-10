@@ -26,19 +26,16 @@
 
 				$result = $sent->get_result();
 
+                mysqli_close($conexion);
 				if (mysqli_num_rows($result)>0) {
 					$_SESSION["usuario"] = $usuario;
-				  	echo 'Iniciando sesión para '.$_SESSION['usuario'].' <p>';
 					echo '<script> window.location="panel.php"; </script>';
 				}
 				else{
 					echo '<script> alert("Usuario o contraseña incorrectos.");</script>';
-					echo '<script> window.location="inicio.php"; </script>';
 				}
-			} else {
-                echo '<script> window.location="inicio.php"; </script>';
             }
-    		mysqli_close($conexion);
+            echo '<script> window.location="inicio.php"; </script>';
 		?>
 </body>
 </html>
