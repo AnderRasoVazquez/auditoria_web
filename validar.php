@@ -35,7 +35,9 @@
 					echo '<script> alert("Usuario o contraseña incorrectos.");</script>';
 					echo '<script> window.location="inicio.php"; </script>';
 				}
-			}
+			} else {
+                echo '<script> window.location="inicio.php"; </script>';
+            }
     		mysqli_close($conexion);
 		?>
 </body>
