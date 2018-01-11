@@ -25,7 +25,6 @@ include 'serv.php';
     };
 
     function comprobarCaracteres(nombrej,fechaj,equipo,nac){
-
         if(comprobar(nombrej,equipo,nac)){
             return true;
             $.post("insertplayer.php", {
@@ -45,6 +44,7 @@ include 'serv.php';
             return false;
         }
     }
+
     function comprobar(nombrej,equipo,nac){
         var patron = /^[a-zA-Z\s]{1,20}$/;
         valueForm1=document.getElementById(nombrej).value;
@@ -60,22 +60,13 @@ include 'serv.php';
     }
 
     function comprobarPasswords(pass1,pass2){
-
-
-
         if(confirm("¿Estás seguro de querer cambiar la contraseña?")){
             valueForm1=document.getElementById(pass1).value;
-
             valueForm2=document.getElementById(pass2).value;
-
-
             if (valueForm1==valueForm2){
-
-
                 return true;
                 $.post("modifyPass.php", {
                     password1: pass1
-
                 }, function(data) {
                     if (data == '¡Has modificado la contraseña correctamente!') {
                         $("form")[0].reset();
@@ -83,41 +74,28 @@ include 'serv.php';
                     alert(data);
                     window.locationf="panel.php";
                 });
-
             }
             alert('Las contraseñas no coinciden');
             return false;
         }
-        else
-        {
+        else {
             return false;
         }
     }
 
-
-
-
-    function validateMail(idMail)
-    {
-
-
-
+    function validateMail(idMail) {
         if(confirm("¿Estás seguro de querer cambiar el email?")){
-
             //Creamos un objeto
             object=document.getElementById(idMail);
             valueForm=object.value;
-
             // Patron para el correo
             var patron=/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,4})+$/;
-            if(valueForm.search(patron)==0)
-            {
+            if(valueForm.search(patron)==0) {
                 //Mail correcto
                 object.style.color="#000";
                 return true;
                 $.post("modifyMail.php", {
                     mail1: idMail
-
                 }, function(data) {
                     if (data == '¡Has modificado el correo correctamente!') {
                         $("form")[0].reset();
@@ -128,32 +106,22 @@ include 'serv.php';
             }
             //Mail incorrecto
             object.style.color="#f00";
-
             alert('Mail incorrecto');
-
             return false;
         }
-        else
-        {
+        else {
             return false;
-
         }
     }
 
     function comprobarCaracteresN(nombre){
-
-
-
         if(confirm("¿Estás seguro de querer cambiar el nombre?")){
-
             valueForm=document.getElementById(nombre).value;
             var patron = /^[a-zA-Z\s]{1,20}$/;
             if(!valueForm.search(patron)){
-
                 return true;
                 $.post("modifyName.php", {
                     name1: nombre
-
                 }, function(data) {
                     if (data == '¡Has modificado el nombre correctamente!') {
                         $("form")[0].reset();
@@ -165,27 +133,20 @@ include 'serv.php';
             alert('Solo letras en nombre');
             return false;
         }
-        else
-        {
+        else {
             return false;
         }
     }
 
-
     function comprobarCaracteresA(apellidos){
-
         confirmacion=confirm("¿Estás seguro de querer cambiar los apellidos?");
-
         if(confirmacion){
-
             valueForm=document.getElementById(apellidos).value;
             var patron = /^[a-zA-Z\s]{1,20}$/;
             if(!valueForm.search(patron)){
-
                 return true;
                 $.post("modifySurname.php", {
                     surname1: apellidos
-
                 }, function(data) {
                     if (data == '¡Has modificado los apellidos correctamente!') {
                         $("form")[0].reset();
@@ -197,19 +158,16 @@ include 'serv.php';
             alert('Solo letras en apellidos');
             return false;
         }
-        else
-        {
+        else {
             return false;
         }
     }
 
     function actualizarFecha(fecha){
-
         if(confirm("¿Estás seguro de querer cambiar tu fecha de Nacimiento?")){
             return true;
             $.post("modifyDate.php", {
                 date1: fecha
-
             }, function(data) {
                 if (data == '¡Has modificado tu DNI correctamente!') {
                     $("form")[0].reset();
@@ -224,11 +182,7 @@ include 'serv.php';
     }
 
     function validarDni(dni){
-
-
-
         if(confirm("¿Estás seguro de querer cambiar el DNI?")){
-
             var numero;
             var letr;
             var letra;
@@ -238,32 +192,23 @@ include 'serv.php';
             valueForm1=object.value;
             valueForm2=object.value;
             expresion_regular_dni = /^\d{8}-[a-zA-Z]$/;
-
             if(valueForm.search(expresion_regular_dni)==0){
-
                 numero = valueForm1.substr(0,8);
                 letr = valueForm2.substr(9,1);
                 letr=letr.toUpperCase();
                 numero = numero % 23;
                 letra='TRWAGMYFPDXBNJZSQVHLCKET';
                 letra=letra.substr(numero,1);
-
                 if (letra!=letr) {
-
                     object.style.color="#f00";
-
                     alert('La letra no corresponde con el DNI.');
                     return false;
-
                 }
                 else{
-
                     object.style.color="#000";
-
                     return true;
                     $.post("modifyDNI.php", {
                         dni1: dni
-
                     }, function(data) {
                         if (data == '¡Has modificado tu DNI correctamente!') {
                             $("form")[0].reset();
@@ -275,20 +220,14 @@ include 'serv.php';
             }
             else{
                 object.style.color="#f00";
-
                 alert('DNI no válido.');
-
                 return false;
-
-
             }
         }
-        else
-        {
+        else {
             return false;
         }
     }
-
     </script>
 
 </head>
