@@ -1,21 +1,7 @@
 <?php
+// include 'inactity_check.php';
 include 'serv.php';
-include 'utils.php';
 require_once 'password_compat/lib/password.php';
-
-
-// session_start();
-// if(!isset($_SESSION['usuario'])) {
-//     // no hay sesión iniciada
-//     echo '<script> window.location="inicio.php"; </script>';
-// } elseif(isset($_SESSION['tiempo']) AND time() > $_SESSION['tiempo'] + getInactivityTime()) {
-//     // ha expirado el tiempo de inactividad
-//     session_unset();
-//     session_destroy();
-//     echo 'Sesión cerrada por inactividad.';
-// 	echo '<script> window.location="inicio.php"; </script>';
-// }
-// $_SESSION['tiempo'] = time();
 
 $sql1 = "SELECT * FROM Usuarios WHERE email=?";
 $sent1 = $conexion->prepare($sql1);

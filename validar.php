@@ -1,6 +1,6 @@
 <?php
-session_start();
 require_once 'password_compat/lib/password.php';
+session_start();
 
 ?>
 <!DOCTYPE html>

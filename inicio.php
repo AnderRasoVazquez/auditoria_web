@@ -1,6 +1,6 @@
 <?php
-session_start();
 include 'serv.php';
+session_start();
 if(isset($_SESSION['usuario'])){
     //el siguiente script hace que nos redirijamos a panel.php si tenemos la sesión iniciada
     echo'<script> window.location="panel.php"; </script>';
