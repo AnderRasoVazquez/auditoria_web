@@ -17,11 +17,11 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `Xdperez067_web_auditoria_sgssi`
+-- Base de datos: `Xdperez067_db_auditoria_sgssi`
 --
-DROP DATABASE 'Xdperez067_web_auditoria_sgssi';
-CREATE DATABASE 'Xdperez067_web_auditoria_sgssi';
-USE 'Xdperez067_web_auditoria_sgssi';
+DROP DATABASE IF EXISTS Xdperez067_db_auditoria_sgssi;
+CREATE DATABASE Xdperez067_db_auditoria_sgssi;
+USE Xdperez067_db_auditoria_sgssi;
 
 -- --------------------------------------------------------
 
@@ -74,11 +74,10 @@ CREATE TABLE IF NOT EXISTS `Usuarios` (
 --
 
 INSERT INTO `Usuarios` (`username`, `password`, `nombre`, `apellidos`, `dni`, `fechanacimiento`, `email`) VALUES
-('admin', '21232f297a57a5a743894a0e4a801fc3', 'Pedro', 'Piqueras', '1234567890', '2017-11-07', 'mail@mail.com'),
-('franco', 'd41d8cd98f00b204e9800998ecf8427e', 'franko', 'franco', '78993757-G', '2017-11-30', 'fsg@gamil.com'),
-('hola', '202cb962ac59075b964b07152d234b70', 'hola', 'hola', '06976781-F', '2017-11-09', 'feafd@gmail.com'),
-('mikel', '8a8bc6f1f2e6762dae7780efd335c743', 'mikel', 'villamane', '12345678-Z', '2022-07-09', 'pepe@pepe.es'),
-('oliver', 'd41d8cd98f00b204e9800998ecf8427e', 'holahermano', 'PODEMOS', '59144796-C', '2017-11-02', 'mail@mailist.com');
+-- contraseña de admin -> admin
+-- contraseña de hola -> 1234
+('admin', '$2y$10$0lD2L/m.F1ghJ7kA3Q3mP.LawmjUfSaZiTQ8bl5l9B0EJQUOLRFrW', 'Pedro', 'Piqueras', '1234567890', '2017-11-07', 'admin@mail.com'),
+('hola', '$2y$10$KYRqUiIIycQUdMQVG2q82ORHN1PSNATJ2FUDO4duh5CaedUVv7w42', 'hola', 'hola', '06976781-F', '2017-11-09', 'feafd@gmail.com');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
