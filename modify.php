@@ -1,5 +1,5 @@
 <?php
-include 'inactity_check.php';
+include 'inactivity_check.php';
 ?>
 <!DOCTYPE html>
 <html>

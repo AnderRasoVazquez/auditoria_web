@@ -1,5 +1,5 @@
 <?php
-include 'inactity_check.php';
+include 'inactivity_check.php';
 include 'serv.php';
 
 if(isset($_POST['submit'])){
