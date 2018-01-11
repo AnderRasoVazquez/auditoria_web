@@ -10,7 +10,7 @@ if(!isset($_SESSION['usuario'])) {
     session_unset();
     session_destroy();
     echo 'Sesión cerrada por inactividad.';
-	echo '<script> window.location="inicio.php"; </script>';
+    echo '<script> window.location="inicio.php"; </script>';
 }
 
 $_SESSION['tiempo'] = time();
@@ -24,7 +24,7 @@ if(isset($_POST['submit6'])){
     $actual = $_SESSION['usuario'];
 
     if ($sent2->execute()) {
-		echo '<script> alert("¡Actualizado correctamente!");</script>';
+        echo '<script> alert("¡Actualizado correctamente!");</script>';
     }else{
         echo "Error....!!";
     }

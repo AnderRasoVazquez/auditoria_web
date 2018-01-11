@@ -7,10 +7,10 @@ echo '<script> window.location="inicio.php"; </script>';
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Saliendo...</title>
-	<meta charset="utf-8">
+    <title>Saliendo...</title>
+    <meta charset="utf-8">
 </head>
 <body>
-<script language="javascript">location.href = "inicio.php";</script>
+    <script language="javascript">location.href = "inicio.php";</script>
 </body>
 </html>

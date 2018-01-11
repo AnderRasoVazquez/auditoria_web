@@ -10,7 +10,7 @@ if(!isset($_SESSION['usuario'])) {
     session_unset();
     session_destroy();
     echo 'Sesión cerrada por inactividad.';
-	echo '<script> window.location="inicio.php"; </script>';
+    echo '<script> window.location="inicio.php"; </script>';
 }
 
 $_SESSION['tiempo'] = time();
@@ -20,11 +20,11 @@ if(isset($_POST['submit4'])){
     $sent2 = $conexion->prepare($sql2);
     $sent2->bind_param("ss", $surname, $actual);
 
-	$surname = $_POST['apellidos'];
+    $surname = $_POST['apellidos'];
     $actual = $_SESSION['usuario'];
 
     if ($sent2->execute()) {
-		echo '<script> alert("¡Actualizado correctamente!");</script>';
+        echo '<script> alert("¡Actualizado correctamente!");</script>';
     }else{
         echo "Error....!!";
     }

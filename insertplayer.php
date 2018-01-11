@@ -15,17 +15,17 @@ if(!isset($_SESSION['usuario'])) {
 $_SESSION['tiempo'] = time();
 
 if(isset($_POST['submit'])){
-	$sql2 = "SELECT * FROM Jugadores WHERE Nombre=?";
-	$sent2 = $conexion->prepare($sql2);
-	$sent2->bind_param("s", $name);
+    $sql2 = "SELECT * FROM Jugadores WHERE Nombre=?";
+    $sent2 = $conexion->prepare($sql2);
+    $sent2->bind_param("s", $name);
     $name = $_POST['nombrej'];
-	$sent2->execute();
-	$result2 = $sent2->get_result();
-	$data2 = mysqli_num_rows($result2) > 0;
-	$sent2->close();
-	if ($data2) {
+    $sent2->execute();
+    $result2 = $sent2->get_result();
+    $data2 = mysqli_num_rows($result2) > 0;
+    $sent2->close();
+    if ($data2) {
         echo '<script> alert("El jugador ya está creado.");</script>';
-	} else {
+    } else {
         $sql2 = "INSERT INTO Jugadores(Nombre, Nacionalidad, FechaNacimiento, NombreEquipo) VALUES (?, ?, ?, ?)";
         $sent2 = $conexion->prepare($sql2);
         $sent2->bind_param("ssss", $name, $nation, $dateplay, $team);

@@ -11,10 +11,10 @@ $bd = "Xdperez067_db_auditoria_sgssi";
 
 
 1. Entrar al MySQL de Xampp:
-    + `/opt/lampp/bin/mysql -uroot` (por defecto no tiene contraseña)
++ `/opt/lampp/bin/mysql -uroot` (por defecto no tiene contraseña)
 2. Desde la consola de MySQL de Xampp:
-    + `CREATE USER 'Xdperez067'@'localhost' IDENTIFIED BY 'AVmu8sW4r';`
-    + `GRANT ALL PRIVILEGES ON * . * TO 'Xdperez067'@'localhost';`
++ `CREATE USER 'Xdperez067'@'localhost' IDENTIFIED BY 'AVmu8sW4r';`
++ `GRANT ALL PRIVILEGES ON * . * TO 'Xdperez067'@'localhost';`
 
 Ahora ya tenemos el usuario creado y si quisiéramos podríamos entrar a la consola de MySQL con él con la contraseña `AVmu8sW4r`:
 

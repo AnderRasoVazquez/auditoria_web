@@ -1,5 +1,5 @@
 <?php
-   function getInactivityTime() {
-       return 60;
-   }
+function getInactivityTime() {
+    return 60;
+}
 ?>

@@ -1,3 +1,3 @@
 <?php
-    echo '<script> window.location="inicio.php"; </script>';
+echo '<script> window.location="inicio.php"; </script>';
 ?>

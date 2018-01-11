@@ -10,7 +10,7 @@ if(!isset($_SESSION['usuario'])) {
     session_unset();
     session_destroy();
     echo 'Sesión cerrada por inactividad.';
-	echo '<script> window.location="inicio.php"; </script>';
+    echo '<script> window.location="inicio.php"; </script>';
 }
 $_SESSION['tiempo'] = time();
 
