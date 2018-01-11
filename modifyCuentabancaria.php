@@ -4,15 +4,15 @@ include 'serv.php';
 require_once 'utils/encriptacion.php';
 
 if(isset($_POST['submit8'])){
-    $sql = "SELECT * FROM Usuarios WHERE username=?";
+    $sql = "SELECT password FROM Usuarios WHERE username=?";
     $sent = $conexion->prepare($sql);
     $sent->bind_param('s', $usuario);
     $usuario = $_SESSION['usuario'];
     $sent->execute();
-    $result = $sent->get_result();
-    $row = $result->fetch_object();
-    $hash = $row->password;
+    $sent->bind_result($hash);
+    $sent->fetch();
     $subhash = substr($hash ,7, 10);
+    $sent->close();
 
     $sql2 = "UPDATE Usuarios SET cuentabancaria=? WHERE username=?";
     $sent2 = $conexion->prepare($sql2);

@@ -9,16 +9,10 @@ $sent = $conexion->prepare($sql);
 $sent->bind_param('s', $usuario);
 $usuario = $_SESSION['usuario'];
 $sent->execute();
-$result = $sent->get_result();
-$row = $result->fetch_object();
+$sent->bind_result($usuario, $hash, $nombre, $apellidos, $dni, $fnacimiento, $email, $cuenta_cifrada);
+$sent->fetch();
+$cuentabancaria = desencriptarNumCuenta($cuenta_cifrada); // aqui se descrifraría la cuenta_cifrada
 mysqli_close($conexion);
-$nombre = $row->nombre;
-$apellidos = $row->apellidos;
-$dni = $row->dni;
-$fnacimiento = $row->fechanacimiento;
-$email = $row->email;
-$cuenta_cifrada= $row->cuentabancaria;
-$cuentabancaria = desencriptarNumCuenta($row->cuentabancaria); // aqui se descrifraría la cuenta_cifrada
 ?>
 <!DOCTYPE html>
 <html>

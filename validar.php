@@ -15,7 +15,7 @@ session_start();
     <?php
     include 'serv.php';
     if(isset($_POST['login'])){
-        $sql = "SELECT * FROM Usuarios WHERE username=?";
+        $sql = "SELECT username, password FROM Usuarios WHERE username=?";
         # sentencia
         $sent = $conexion->prepare($sql);
 
@@ -26,12 +26,10 @@ session_start();
 
         $sent->execute();
 
-        $result = $sent->get_result();
+        $sent->bind_result($usuario, $hash);
+        $sent->fetch();
         mysqli_close($conexion);
-        if (mysqli_num_rows($result)!=0) {
-
-            $row = $result->fetch_object();
-            $hash = $row->password;
+        if (isset($hash)) {
             if (password_verify($pw, $hash)) {
                 $_SESSION["usuario"] = $usuario;
                 echo 'Iniciando sesión para '.$_SESSION['usuario'].' <p>';

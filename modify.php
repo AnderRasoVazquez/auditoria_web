@@ -69,28 +69,25 @@ include 'inactivity_check.php';
         $sent1->bind_param("i", $id);
         $id = $_GET['id'];
         $sent1->execute();
-
-        if($res = $sent1->get_result()){
-            if(mysqli_num_rows($res) > 0){
-                echo "<table>";
-                echo "<tr>";
-                echo "<th>ID</th>";
-                echo "<th>Nombre</th>";
-                echo "<th>Nacionalidad</th>";
-                echo "<th>FechaNacimiento</th>";
-                echo "<th>NombreEquipo</th>";
-                echo "</tr>";
-                while($row1 = mysqli_fetch_array($res)){
-                    echo "<tr>";
-                    echo "<td>" . $row1['ID'] . "</td>";
-                    echo "<td>" . $row1['Nombre'] . "</td>";
-                    echo "<td>" . $row1['Nacionalidad'] . "</td>";
-                    echo "<td>" . $row1['FechaNacimiento'] . "</td>";
-                    echo "<td>" . $row1['NombreEquipo'] . "</td>";
-                    echo "</tr>";
-                }
-                echo "</table>";
-            }
+        $sent1->bind_result($id, $nombre, $nacionalidad, $fecha, $equipo);
+        $sent1->fetch();
+        if(isset($nombre)){
+            echo "<table>";
+            echo "<tr>";
+            echo "<th>ID</th>";
+            echo "<th>Nombre</th>";
+            echo "<th>Nacionalidad</th>";
+            echo "<th>FechaNacimiento</th>";
+            echo "<th>NombreEquipo</th>";
+            echo "</tr>";
+            echo "<tr>";
+            echo "<td>" . $id . "</td>";
+            echo "<td>" . $nombre . "</td>";
+            echo "<td>" . $nacionalidad . "</td>";
+            echo "<td>" . $fecha . "</td>";
+            echo "<td>" . $equipo . "</td>";
+            echo "</tr>";
+            echo "</table>";
         }
     }
     ?>

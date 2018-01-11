@@ -4,43 +4,43 @@ include 'serv.php';
 require_once 'password_compat/lib/password.php';
 require_once 'utils/encriptacion.php';
 
-$sql1 = "SELECT * FROM Usuarios WHERE email=?";
+$sql1 = "SELECT email FROM Usuarios WHERE email=?";
 $sent1 = $conexion->prepare($sql1);
 $sent1->bind_param("s", $correo);
+$user = $_POST['correo'];
 $sent1->execute();
-$correo = $_POST['correo'];
-$result1 = $sent1->get_result();
-$data1 = mysqli_num_rows($result1)>0;
-if ($data1) {
+$sent1->bind_result($res1);
+$sent1->fetch();
+if (isset($res1)) {
     echo '<script> alert("El Email introducido ya pertenece a otro usuario.");</script>';
 }
 $sent1->close();
 
-$sql2 = "SELECT * FROM Usuarios WHERE username=?";
+$sql2 = "SELECT username FROM Usuarios WHERE username=?";
 $sent2 = $conexion->prepare($sql2);
 $sent2->bind_param("s", $user);
 $user = $_POST['usuario'];
 $sent2->execute();
-$result2 = $sent2->get_result();
-$data2 = mysqli_num_rows($result2)>0;
-if ($data2) {
+$sent2->bind_result($res2);
+$sent2->fetch();
+if (isset($res2)) {
     echo '<script> alert("El nombre de usuario introducido ya pertence a otro usuario.");</script>';
 }
 $sent2->close();
 
-$sql3 = "SELECT * FROM Usuarios WHERE dni=?";
+$sql3 = "SELECT dni FROM Usuarios WHERE dni=?";
 $sent3 = $conexion->prepare($sql3);
 $sent3->bind_param("s", $dni);
 $dni = $_POST['dni'];
 $sent3->execute();
-$result3 = $sent3->get_result();
-$data3 = mysqli_num_rows($result3)>0;
-if ($data3) {
+$sent3->bind_result($res3);
+$sent3->fetch();
+if (isset($res3)) {
     echo '<script> alert("El DNI introducido ya pertence a otro usuario.");</script>';
 }
 $sent3->close();
 
-if (!$data1 && !$data2 && !$data3)  {
+if (!isset($res1) && !isset($res2) && !isset($res3))  {
     $sql = "INSERT INTO Usuarios(username, password, nombre, apellidos, dni, fechanacimiento, email, cuentabancaria) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $sent = $conexion->prepare($sql);
     $sent->bind_param("ssssssss", $user, $pass, $name, $lastname, $dni, $date, $correo, $cuentabancaria);
@@ -57,7 +57,7 @@ if (!$data1 && !$data2 && !$data3)  {
 
     if($sent->execute()){
         echo '<script> alert("¡Te has registrado correctamente!");</script>';
-        echo '<script> window.location="inicio.php"; </script>';
+        // echo '<script> window.location="inicio.php"; </script>';
     }else{
         echo "Error....!!";
     }
