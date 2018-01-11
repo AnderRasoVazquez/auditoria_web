@@ -2,7 +2,7 @@
 include 'inactivity_check.php';
 include 'serv.php';
 
-if(isset($_POST['submit3'])){
+if(isset($_POST['submit8'])){
     $sql = "SELECT * FROM Usuarios WHERE username=?";
     $sent = $conexion->prepare($sql);
     $sent->bind_param('s', $usuario);
@@ -13,12 +13,11 @@ if(isset($_POST['submit3'])){
     $hash = $row->password;
     $subhash = substr($hash ,7, 16);
 
-
     $sql2 = "UPDATE Usuarios SET cuentabancaria=? WHERE username=?";
     $sent2 = $conexion->prepare($sql2);
-    $sent2->bind_param("ss", $nombre, $actual);
+    $sent2->bind_param("ss", $cuentabancaria, $nombre);
     $cuentabancaria = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $subhash, $_POST['cuentabancaria'], MCRYPT_MODE_ECB);
-    $actual = $_SESSION['usuario'];
+    $nombre = $_SESSION['usuario'];
 
     if ($sent2->execute()) {
         echo '<script> alert("¡Actualizado correctamente!");</script>';
