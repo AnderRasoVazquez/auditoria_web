@@ -1,6 +1,23 @@
 <?php
 include 'inactivity_check.php';
 include 'serv.php';
+
+$sql = "SELECT * FROM Usuarios WHERE username=?";
+# sentencia
+$sent = $conexion->prepare($sql);
+$sent->bind_param('s', $usuario);
+$usuario = $_SESSION['usuario'];
+$sent->execute();
+$result = $sent->get_result();
+$row = $result->fetch_object();
+mysqli_close($conexion);
+$nombre = $row->nombre;
+$apellidos = $row->apellidos;
+$dni = $row->dni;
+$fnacimiento = $row->fechanacimiento;
+$email = $row->email;
+$cuenta_cifrada= $row->cuentabancaria;
+$cuentabancaria = "foo"; // aqui se descrifraría la cuenta_cifrada
 ?>
 <!DOCTYPE html>
 <html>
@@ -291,31 +308,37 @@ include 'serv.php';
                     </form>
                     <form id="form-name" action="modifyName.php" method="post" autocomplete="off">
                         <p><label for="nombre">Nombre:</label></p>
+                        <p><label for="nombre"><?echo $nombre?></label></p>
                         <input name="nombre" type="text" id="nombre" class="nombre" placeholder="Introduce tu nombre" required=""/></p>
                         <p align="right" id="bot"><input type="submit" id="submit3" name="submit3" value="Modificar Nombre" class="boton1" onclick="return comprobarCaracteresN('nombre')"></p>
                     </form>
                     <form id="form-ape" action="modifySurname.php" method="post" autocomplete="off">
                         <p><label for="apellidos">Apellidos:</label></p>
+                        <p><label for="apellidos"><?echo $apellidos?></label></p>
                         <input name="apellidos" type="text" id="apellidos" class="apellidos" placeholder="Introduce tus apellidos" required=""/></p>
                         <p align="right" id="bot"><input type="submit" id="submit4" name="submit4" value="Modificar Apellidos" class="boton1" onclick="return comprobarCaracteresA('apellidos')"></p>
                     </form>
                     <form id="form-dni" action="modifyDNI.php" method="post" autocomplete="off">
                         <p><label for="dni">DNI:</label></p>
+                        <p><label for="dni"><?echo $dni?></label></p>
                         <input name="dni" type="text" id="dni" class="dni" placeholder="Introduce tu DNI" onchange="javascript:colorearDni('dni')" required="" /></p>
                         <p align="right" id="bot"><input type="submit" id="submit5" name="submit5" value="Modificar DNI" class="boton1" onclick="return validarDni('dni')"></p>
                     </form>
                     <form id="form-fecha" action="modifyDate.php" method="post" autocomplete="off">
                         <p><label for="fecha">Fecha de nacimiento:</label></p>
+                        <p><label for="fecha"><?echo $fnacimiento?></label></p>
                         <input name="fecha" type="date" id="fecha" class="fecha" placeholder="Introduce tus fecha de nacimiento" required=""/></p>
                         <p align="right" id="bot"><input type="submit" id="submit6" name="submit6" value="Modificar Fecha" class="boton1" onclick="return actualizarFecha('fecha')"></p>
                     </form>
                     <form id="form-correo" action="modifyMail.php" method="post" autocomplete="off">
                         <p><label for="correo">Correo:</label></p>
+                        <p><label for="correo"><?echo $email?></label></p>
                         <input name="correo" type="text" id="correo" class="correo" placeholder="Introduce tu mail"  required="" /></p>
                         <p align="right" id="bot"><input type="submit" id="submit7" name="submit7" value="Modificar Correo" class="boton1" onclick="return validateMail('correo')"></p>
                     </form>
                     <form id="form-cuentabancaria" action="modifyCuentabancaria.php" method="post" autocomplete="off">
                         <p><label for="cuentabancaria">Cuenta bancaria:</label></p>
+                        <p><label for="cuentabancaria"><?echo $cuentabancaria?></label></p>
                         <input name="cuentabancaria" type="text" id="cuentabancaria" class="cuentabancaria" placeholder="Introduce tu cuenta bancaria"  required="" /></p>
                         <p align="right" id="bot"><input type="submit" id="submit8" name="submit8" value="Modificar Cuenta Bancaria" class="boton1" onclick="return validateCuentabancaria('cuentabancaria')"></p>
                     </form>
