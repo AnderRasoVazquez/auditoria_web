@@ -33,13 +33,11 @@ session_start();
             $row = $result->fetch_object();
             $hash = $row->password;
             if (password_verify($pw, $hash)) {
-                echo $pw;
                 $_SESSION["usuario"] = $usuario;
                 echo 'Iniciando sesión para '.$_SESSION['usuario'].' <p>';
                 echo '<script> window.location="panel.php"; </script>';
-            }else{
-                echo $hash;
             }
+            echo '<script> alert("Usuario o contraseña incorrectos.");</script>';
         }
         else{
             echo '<script> alert("Usuario o contraseña incorrectos.");</script>';
