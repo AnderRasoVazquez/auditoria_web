@@ -1,12 +1,9 @@
 <?php
-  //echo '<script> window.location="inicio.php"; </script>';
-
-  $s = 'pene';
-  $hash = password_hash($s, PASSWORD_DEFAULT);
-  $c = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, '1234567812345678', $s, MCRYPT_MODE_ECB);
-  echo $c;
-  echo '<br>';
-  $d = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, '1234567812345678', $c, MCRYPT_MODE_ECB);
-  echo $d;
-  //substr($hash, 7, 16)
+include 'CaesarCipher.php';
+$cipher = new CaesarCipher();
+$ciphertext = $cipher->encrypt('DP0000000000000000000012', 4);
+echo $ciphertext;
+echo "<br>"
+$plaintext = $cipher->decrypt($ciphertext, 4);
+echo $plaintext;
 ?>
