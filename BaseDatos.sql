@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `Usuarios` (
   `dni` varchar(10) NOT NULL,
   `fechanacimiento` date NOT NULL,
   `email` varchar(30) NOT NULL,
-  'cuentabancaria' varchar(24) NOT NULL,
+  `cuentabancaria` varchar(24) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `Usuarios` (
 -- Volcado de datos para la tabla `Usuarios`
 --
 
-INSERT INTO `Usuarios` (`username`, `password`, `nombre`, `apellidos`, `dni`, `fechanacimiento`, `email`) VALUES
+INSERT INTO `Usuarios` (`username`, `password`, `nombre`, `apellidos`, `dni`, `fechanacimiento`, `email`, `cuentabancaria`) VALUES
 -- contraseña de admin -> admin
 -- contraseña de hola -> 1234
 ('admin', '$2y$10$0lD2L/m.F1ghJ7kA3Q3mP.LawmjUfSaZiTQ8bl5l9B0EJQUOLRFrW', 'Pedro', 'Piqueras', '1234567890', '2017-11-07', 'admin@mail.com', 'ES0000000000000000000000'),
