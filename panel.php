@@ -120,6 +120,30 @@ include 'serv.php';
         }
     }
 
+    function validateCuentabancaria(idCuentabancaria) {
+        if(confirm("¿Estás seguro de querer cambiar la cuenta bancaria?")){
+          valueForm=document.getElementById(idCuentabancaria).value;
+          var patron = /^[A-Z]{2}[0-9]{22}$/;
+          if(!valueForm.search(patron)){
+              return true;
+              $.post("modifyCuentabancaria.php", {
+                  cuentabancaria1: cuentabancaria
+              }, function(data) {
+                  if (data == '¡Has modificado la cuenta bancaria correctamente!') {
+                      $("form")[0].reset();
+                  }
+                  alert(data);
+                  window.locationf="panel.php";
+              });
+          }
+          alert('Introduce una cuenta bancaria válida');
+          return false;
+        }
+        else {
+            return false;
+        }
+    }
+
     function comprobarCaracteresN(nombre){
         if(confirm("¿Estás seguro de querer cambiar el nombre?")){
             valueForm=document.getElementById(nombre).value;
@@ -289,6 +313,11 @@ include 'serv.php';
                         <p><label for="correo">Correo:</label></p>
                         <input name="correo" type="text" id="correo" class="correo" placeholder="Introduce tu mail"  required="" /></p>
                         <p align="right" id="bot"><input type="submit" id="submit7" name="submit7" value="Modificar Correo" class="boton1" onclick="return validateMail('correo')"></p>
+                    </form>
+                    <form id="form-cuentabancaria" action="modifyCuentabancaria.php" method="post" autocomplete="off">
+                        <p><label for="cuentabancaria">Cuenta bancaria:</label></p>
+                        <input name="cuentabancaria" type="text" id="cuentabancaria" class="cuentabancaria" placeholder="Introduce tu cuenta bancaria"  required="" /></p>
+                        <p align="right" id="bot"><input type="submit" id="submit8" name="submit8" value="Modificar Cuenta Bancaria" class="boton1" onclick="return validateCuentabancaria('cuentabancaria')"></p>
                     </form>
                 </div>
                 <!--parte de añadir elemnto/jugador-->

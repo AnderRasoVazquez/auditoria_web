@@ -1,6 +1,7 @@
 <?php
 include 'inactivity_check.php';
 include 'serv.php';
+require_once 'password_compat/lib/password.php';
 
 if(isset($_POST['submit2'])){
     $sql2 = "UPDATE Usuarios SET password=? WHERE username=?";

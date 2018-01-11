@@ -63,8 +63,8 @@ if (!$data1 && !$data2 && !$data3 && !$data4)  {
     $name = $_POST['nombre'];
     $lastname = $_POST['apellidos'];
     $date = $_POST['fecha'];
-    $cuentabancaria = $_POST['cuentabancaria'];
     $pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+    $cuentabancaria = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, substr($pass, 7, 16), $_POST['nombre'], MCRYPT_MODE_ECB);
 
 
     if($sent->execute()){
