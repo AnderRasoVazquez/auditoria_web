@@ -59,7 +59,7 @@ include 'inactivity_check.php';
     $pattern = "/^[0-9]*$/";
     if (!preg_match($pattern , $id)) {
         $kanye_west_meme ="¯\\\_\(ツ\)_\/¯";
-        echo "<script> alert('Intento de inyección SQL detectado, su IP ha quedado registrada y se enviará a las autoridades.". $kanye_west_meme ."');</script>";
+        echo "<script> alert('Intento de XSS o inyección SQL detectado, su IP ha quedado registrada y se enviará a las autoridades.". $kanye_west_meme ."');</script>";
         echo '<script> window.location="panel.php"; </script>';
     } else {
         $idact = $id;
