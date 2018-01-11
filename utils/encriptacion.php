@@ -19,7 +19,7 @@
 
   function desencriptarNumCuenta($num){
       $result = "";
-      $key = substr($numEnc, 0, 10);
+      $key = substr($num, 0, 10);
       $numC = substr($num, -24);
       for ($i=0; $i < strlen($numC); $i++) {
           if ($i<2){

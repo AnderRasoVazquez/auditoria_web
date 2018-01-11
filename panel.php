@@ -1,6 +1,7 @@
 <?php
 include 'inactivity_check.php';
 include 'serv.php';
+require_once 'utils/encriptacion.php';
 
 $sql = "SELECT * FROM Usuarios WHERE username=?";
 # sentencia
@@ -17,7 +18,7 @@ $dni = $row->dni;
 $fnacimiento = $row->fechanacimiento;
 $email = $row->email;
 $cuenta_cifrada= $row->cuentabancaria;
-$cuentabancaria = "foo"; // aqui se descrifraría la cuenta_cifrada
+$cuentabancaria = desencriptarNumCuenta($row->cuentabancaria); // aqui se descrifraría la cuenta_cifrada
 ?>
 <!DOCTYPE html>
 <html>
