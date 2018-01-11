@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `Jugadores` (
   `Nombre` varchar(255) NOT NULL,
   `Nacionalidad` varchar(255) NOT NULL,
   `FechaNacimiento` date NOT NULL,
-  `NombreEquipo` varchar(20) NOT NULL,
+  `NombreEquipo` varchar(30) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
@@ -59,13 +59,13 @@ INSERT INTO `Jugadores` (`ID`, `Nombre`, `Nacionalidad`, `FechaNacimiento`, `Nom
 --
 
 CREATE TABLE IF NOT EXISTS `Usuarios` (
-  `username` varchar(15) NOT NULL,
+  `username` varchar(30) NOT NULL,
   `password` char(255) NOT NULL,
-  `nombre` varchar(15) NOT NULL,
-  `apellidos` varchar(20) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
+  `apellidos` varchar(30) NOT NULL,
   `dni` varchar(10) NOT NULL,
   `fechanacimiento` date NOT NULL,
-  `email` varchar(20) NOT NULL,
+  `email` varchar(30) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
