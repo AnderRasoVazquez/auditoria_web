@@ -1,6 +1,9 @@
 <?php
 	include 'serv.php';
     include 'utils.php';
+		require_once 'password_compat/lib/password.php';
+
+
     // session_start();
     // if(!isset($_SESSION['usuario'])) {
     //     // no hay sesión iniciada
@@ -62,7 +65,8 @@
 		$name = $_POST['nombre'];
 		$lastname = $_POST['apellidos'];
 		$date = $_POST['fecha'];
-		$pass = md5($_POST['pass']);
+		$pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+
 
 		if($sent->execute()){
 			echo '<script> alert("¡Te has registrado correctamente!");</script>';

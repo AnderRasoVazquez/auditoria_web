@@ -1,5 +1,7 @@
 <?php
 	session_start();
+	require_once 'password_compat/lib/password.php';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,23 +15,31 @@
 		<?php
 			include 'serv.php';
 			if(isset($_POST['login'])){
-				$sql = "SELECT * FROM Usuarios WHERE username=? AND password=?";
+				$sql = "SELECT * FROM Usuarios WHERE username=?";
 				# sentencia
 				$sent = $conexion->prepare($sql);
 
-				$sent->bind_param("ss", $usuario, $pw);
+				$sent->bind_param('s', $usuario);
 
 				$usuario = $_POST['usuario'];
-				$pw = md5($_POST['contrasenia']);
+				$pw = $_POST['contrasenia'];
 
 				$sent->execute();
 
 				$result = $sent->get_result();
+                 mysqli_close($conexion);
+				if (mysqli_num_rows($result)!=0) {
 
-                mysqli_close($conexion);
-				if (mysqli_num_rows($result)>0) {
-					$_SESSION["usuario"] = $usuario;
-					echo '<script> window.location="panel.php"; </script>';
+					$row = $result->fetch_object();
+					$hash = $row->password;
+					if (password_verify($pw, $hash)) {
+						echo $pw;
+						$_SESSION["usuario"] = $usuario;
+				  	echo 'Iniciando sesión para '.$_SESSION['usuario'].' <p>';
+						echo '<script> window.location="panel.php"; </script>';
+					}else{
+						echo $hash;
+					}
 				}
 				else{
 					echo '<script> alert("Usuario o contraseña incorrectos.");</script>';
