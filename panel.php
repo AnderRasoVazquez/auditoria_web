@@ -60,27 +60,33 @@ include 'serv.php';
     }
 
     function comprobarPasswords(pass1,pass2){
-        if(confirm("¿Estás seguro de querer cambiar la contraseña?")){
-            valueForm1=document.getElementById(pass1).value;
-            valueForm2=document.getElementById(pass2).value;
-            if (valueForm1==valueForm2){
-                return true;
-                $.post("modifyPass.php", {
-                    password1: pass1
-                }, function(data) {
-                    if (data == '¡Has modificado la contraseña correctamente!') {
-                        $("form")[0].reset();
+        valueForm1=document.getElementById(pass1).value;
+        valueForm2=document.getElementById(pass2).value;
+        if (valueForm1==valueForm2){
+            // no me gusta el ir comprobando la misma string multiples veces para distintos criterios
+            // pero las regex no son lo mío. al menos parece que tira
+            if (valueForm1.length >= 8) {
+                regex = /[a-z]+/;
+                if (regex.test(valueForm1)) {
+                    regex = /[A-Z]+/;
+                    if (regex.test(valueForm1)) {
+                        regex = /[0-9]+/;
+                        if (regex.test(valueForm1)) {
+                            regex = /[_¿?¡!|@·#$~%&()]+/;
+                            if (regex.test(valueForm1)) {
+                                if(confirm("¿Estás seguro de querer cambiar la contraseña?")){
+                                    return true;
+                                }
+                            }
+                        }
                     }
-                    alert(data);
-                    window.locationf="panel.php";
-                });
+                }
             }
-            alert('Las contraseñas no coinciden');
+            alert('La contraseña tiene que contener letras mayúsculas, minúscuas, números y símbolos. Longitud mínima de 8 caracteres.');
             return false;
         }
-        else {
-            return false;
-        }
+        alert('Las contraseñas no coinciden');
+        return false;
     }
 
     function validateMail(idMail) {
