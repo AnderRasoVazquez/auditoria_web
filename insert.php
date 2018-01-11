@@ -2,6 +2,7 @@
 // include 'inactivity_check.php';
 include 'serv.php';
 require_once 'password_compat/lib/password.php';
+require_once 'utils/encriptacion.php';
 
 $sql1 = "SELECT * FROM Usuarios WHERE email=?";
 $sent1 = $conexion->prepare($sql1);
@@ -51,7 +52,7 @@ if (!$data1 && !$data2 && !$data3)  {
     $lastname = $_POST['apellidos'];
     $date = $_POST['fecha'];
     $pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
-    $cuentabancaria = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, substr($pass, 7, 16), $_POST['nombre'], MCRYPT_MODE_ECB);
+    $cuentabancaria = encriptarNumCuenta($_POST['cuentabancaria']);
 
 
     if($sent->execute()){

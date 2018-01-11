@@ -1,6 +1,7 @@
 <?php
 include 'inactivity_check.php';
 include 'serv.php';
+require_once 'utils/encriptacion.php';
 
 if(isset($_POST['submit8'])){
     $sql = "SELECT * FROM Usuarios WHERE username=?";
@@ -11,12 +12,12 @@ if(isset($_POST['submit8'])){
     $result = $sent->get_result();
     $row = $result->fetch_object();
     $hash = $row->password;
-    $subhash = substr($hash ,7, 16);
+    $subhash = substr($hash ,7, 10);
 
     $sql2 = "UPDATE Usuarios SET cuentabancaria=? WHERE username=?";
     $sent2 = $conexion->prepare($sql2);
     $sent2->bind_param("ss", $cuentabancaria, $nombre);
-    $cuentabancaria = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $subhash, $_POST['cuentabancaria'], MCRYPT_MODE_ECB);
+    $cuentabancaria = encriptarNumCuenta($_POST['cuentabancaria']);
     $nombre = $_SESSION['usuario'];
 
     if ($sent2->execute()) {
