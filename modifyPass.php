@@ -7,7 +7,7 @@ if(isset($_POST['submit2'])){
     $sent2 = $conexion->prepare($sql2);
     $sent2->bind_param("ss", $pass, $actual);
 
-    $pass = md5($_POST['pass']);
+    $pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
     $actual = $_SESSION['usuario'];
 
     if ($sent2->execute()) {
