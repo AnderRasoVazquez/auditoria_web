@@ -172,9 +172,10 @@ if(isset($_SESSION['usuario'])) {
                     <input name="fecha" type="date" id="fecha" class="fecha" placeholder="Introduce tus fecha de nacimiento" required=""/></p>
                     <p><label for="correo">Correo:</label></p>
                     <input name="correo" type="text" id="correo" class="correo" placeholder="Introduce tu mail"  required="" /></p>
+                    <p><label for="cuentabancaria">Cuenta bancaria:</label></p>
+                    <input name="cuentabancaria" type="text" id="cuentabancaria" class="cuentabancaria" placeholder="Introduce tu cuenta bancaria"  required="" /></p>
                     <p><label for="pass">Password:</label></p>
                     <input name="pass" type="password" id="pass" class="pass" placeholder="Introduce tu contraseña" required=""/></p>
-
                     <p><label for="repass">Repetir Password:</label></p>
                     <input name="repass" type="password" id="repass" class="repass" placeholder="Repite contraseña" required=""/></p>
 

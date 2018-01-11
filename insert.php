@@ -41,9 +41,9 @@ $sent3->close();
 
 
 if (!$data1 && !$data2 && !$data3)  {
-    $sql = "INSERT INTO Usuarios(username, password, nombre, apellidos, dni, fechanacimiento, email) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO Usuarios(username, password, nombre, apellidos, dni, fechanacimiento, email, cuentabancaria) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $sent = $conexion->prepare($sql);
-    $sent->bind_param("sssssss", $user, $pass, $name, $lastname, $dni, $date, $correo);
+    $sent->bind_param("sssssss", $user, $pass, $name, $lastname, $dni, $date, $correo, $cuentabancaria);
 
     $user = $_POST['usuario'];
     $correo = $_POST['correo'];
@@ -51,6 +51,7 @@ if (!$data1 && !$data2 && !$data3)  {
     $name = $_POST['nombre'];
     $lastname = $_POST['apellidos'];
     $date = $_POST['fecha'];
+    $cuentabancaria = $_POST['cuentabancaria'];
     $pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
 
 
