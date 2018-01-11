@@ -66,6 +66,7 @@ CREATE TABLE IF NOT EXISTS `Usuarios` (
   `dni` varchar(10) NOT NULL,
   `fechanacimiento` date NOT NULL,
   `email` varchar(30) NOT NULL,
+  'cuentabancaria' varchar(24) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -76,8 +77,8 @@ CREATE TABLE IF NOT EXISTS `Usuarios` (
 INSERT INTO `Usuarios` (`username`, `password`, `nombre`, `apellidos`, `dni`, `fechanacimiento`, `email`) VALUES
 -- contraseña de admin -> admin
 -- contraseña de hola -> 1234
-('admin', '$2y$10$0lD2L/m.F1ghJ7kA3Q3mP.LawmjUfSaZiTQ8bl5l9B0EJQUOLRFrW', 'Pedro', 'Piqueras', '1234567890', '2017-11-07', 'admin@mail.com'),
-('hola', '$2y$10$KYRqUiIIycQUdMQVG2q82ORHN1PSNATJ2FUDO4duh5CaedUVv7w42', 'hola', 'hola', '06976781-F', '2017-11-09', 'feafd@gmail.com');
+('admin', '$2y$10$0lD2L/m.F1ghJ7kA3Q3mP.LawmjUfSaZiTQ8bl5l9B0EJQUOLRFrW', 'Pedro', 'Piqueras', '1234567890', '2017-11-07', 'admin@mail.com', 'ES0000000000000000000000'),
+('hola', '$2y$10$KYRqUiIIycQUdMQVG2q82ORHN1PSNATJ2FUDO4duh5CaedUVv7w42', 'hola', 'hola', '06976781-F', '2017-11-09', 'feafd@gmail.com', 'ES0000000000000000000000');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
