@@ -1,3 +1,3 @@
 <?php
-  echo "QUE HACES AQUÍ"
+echo '<script> window.location="inicio.php"; </script>';
 ?>
