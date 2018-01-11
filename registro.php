@@ -16,13 +16,13 @@ if(isset($_SESSION['usuario'])) {
     <link type="text/css" href="./css/formato.css" rel="stylesheet" />
     <script type="text/javascript">
 
-    function misFunciones(idMail,dni,pass,repass,nombre,apellidos,usuario,fecha, cuentabancaria){
+    function misFunciones(idMail,dni,pass,repass,nombre,apellidos,usuario,fecha,cuentabancaria){
         if (validateMail(idMail) &&
         validarDni(dni) &&
         comprobarPasswords(pass,repass) &&
         comprobarCaracteresN(nombre) &&
         comprobarCaracteresA(apellidos) &&
-        comprobarUsuario(usuario))
+        comprobarUsuario(usuario) &&
         comprobarCuentaBancaria(cuentabancaria)) {
             document.getElementById("form_id").submit();
         }
