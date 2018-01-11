@@ -43,7 +43,7 @@ $sent3->close();
 if (!$data1 && !$data2 && !$data3)  {
     $sql = "INSERT INTO Usuarios(username, password, nombre, apellidos, dni, fechanacimiento, email, cuentabancaria) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $sent = $conexion->prepare($sql);
-    $sent->bind_param("sssssss", $user, $pass, $name, $lastname, $dni, $date, $correo, $cuentabancaria);
+    $sent->bind_param("ssssssss", $user, $pass, $name, $lastname, $dni, $date, $correo, $cuentabancaria);
 
     $user = $_POST['usuario'];
     $correo = $_POST['correo'];
