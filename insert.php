@@ -39,20 +39,7 @@ if ($data3) {
 }
 $sent3->close();
 
-$sql4 = "SELECT * FROM Usuarios WHERE cuentabancaria=?";
-$sent4 = $conexion->prepare($sql4);
-$sent4->bind_param("s", $cuentabancaria);
-$cuentabancaria = $_POST['cuentabancaria'];
-$sent4->execute();
-$result4 = $sent4->get_result();
-$data4 = mysqli_num_rows($result4)>0;
-if ($data4) {
-    echo '<script> alert("La cuenta bancaria introducida ya pertence a otro usuario.");</script>';
-}
-$sent4->close();
-
-
-if (!$data1 && !$data2 && !$data3 && !$data4)  {
+if (!$data1 && !$data2 && !$data3)  {
     $sql = "INSERT INTO Usuarios(username, password, nombre, apellidos, dni, fechanacimiento, email, cuentabancaria) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $sent = $conexion->prepare($sql);
     $sent->bind_param("ssssssss", $user, $pass, $name, $lastname, $dni, $date, $correo, $cuentabancaria);
