@@ -16,13 +16,14 @@ if(isset($_SESSION['usuario'])) {
     <link type="text/css" href="./css/formato.css" rel="stylesheet" />
     <script type="text/javascript">
 
-    function misFunciones(idMail,dni,pass,repass,nombre,apellidos,usuario,fecha){
+    function misFunciones(idMail,dni,pass,repass,nombre,apellidos,usuario,fecha, cuentabancaria){
         if (validateMail(idMail) &&
         validarDni(dni) &&
         comprobarPasswords(pass,repass) &&
         comprobarCaracteresN(nombre) &&
         comprobarCaracteresA(apellidos) &&
-        comprobarUsuario(usuario)) {
+        comprobarUsuario(usuario))
+        comprobarCuentaBancaria(cuentabancaria)) {
             document.getElementById("form_id").submit();
         }
     }
@@ -72,6 +73,16 @@ if(isset($_SESSION['usuario'])) {
             return true;
         }
         alert('Sin espacios el usuario');
+        return false;
+    }
+
+    function comprobarCuentaBancaria(cuentabancaria){
+        valueForm=document.getElementById(cuentabancaria).value;
+        var patron = /^[A-Z]{2}[0-9]{22}$/;
+        if(!valueForm.search(patron)){
+            return true;
+        }
+        alert('Cuenta bancaria no válida');
         return false;
     }
 
@@ -179,7 +190,7 @@ if(isset($_SESSION['usuario'])) {
                     <p><label for="repass">Repetir Password:</label></p>
                     <input name="repass" type="password" id="repass" class="repass" placeholder="Repite contraseña" required=""/></p>
 
-                    <p id="bot"><input name="btnSubmit" type="button" id="boton" value="Registrar" class="boton" onclick="misFunciones('correo','dni','pass','repass','nombre','apellidos','usuario', 'fecha')" /></p>
+                <p id="bot"><input name="btnSubmit" type="button" id="boton" value="Registrar" class="boton" onclick="misFunciones('correo','dni','pass','repass','nombre','apellidos','usuario', 'fecha', 'cuentabancaria')" /></p>
                 </form>
             </div>
 
